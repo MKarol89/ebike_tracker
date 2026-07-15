@@ -18,6 +18,7 @@ ODOMETER_DESCRIPTION = NumberEntityDescription(
     key="odometer_input",
     translation_key="odometer_input",
     native_min_value=0,
+    native_max_value=1_000_000,
     native_step=0.1,
     native_unit_of_measurement=UnitOfLength.KILOMETERS,
     mode=NumberMode.BOX,

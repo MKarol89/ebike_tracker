@@ -32,7 +32,7 @@ class EbikeTrackerConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     @staticmethod
     def async_get_options_flow(config_entry):
         """Create the options flow."""
-        return EbikeTrackerOptionsFlow(config_entry)
+        return EbikeTrackerOptionsFlow()
 
     async def async_step_user(
         self,
@@ -62,10 +62,6 @@ class EbikeTrackerConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
 class EbikeTrackerOptionsFlow(config_entries.OptionsFlow):
     """Handle options for E-bike Tracker."""
-
-    def __init__(self, config_entry) -> None:
-        """Initialize options flow."""
-        self.config_entry = config_entry
 
     async def async_step_init(
         self,
