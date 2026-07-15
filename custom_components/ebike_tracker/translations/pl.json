@@ -1,0 +1,149 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Dodaj E-bike Tracker",
+        "description": "Skonfiguruj jeden rower elektryczny. Encja energii musi być narastającym licznikiem kWh.",
+        "data": {
+          "bike_name": "Nazwa roweru",
+          "odometer_km": "Aktualny całkowity przebieg",
+          "energy_entity_id": "Encja narastającego licznika energii",
+          "power_entity_id": "Encja mocy ładowania",
+          "energy_price": "Cena energii",
+          "battery_capacity_wh": "Pojemność baterii"
+        },
+        "data_description": {
+          "odometer_km": "Aktualna wartość licznika przebiegu w kilometrach.",
+          "energy_entity_id": "Sensor Home Assistant z narastającą wartością kWh, na przykład z inteligentnego gniazdka.",
+          "power_entity_id": "Opcjonalny sensor mocy w watach używany do wykrywania ładowania.",
+          "energy_price": "Cena energii w PLN za kWh.",
+          "battery_capacity_wh": "Opcjonalna pojemność baterii w Wh."
+        }
+      }
+    },
+    "error": {
+      "bike_name_required": "Podaj nazwę roweru."
+    },
+    "abort": {
+      "already_configured": "Ten rower jest już skonfigurowany."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opcje E-bike Tracker",
+        "description": "Zmień cenę energii, encje źródłowe, wykrywanie ładowania i dane baterii.",
+        "data": {
+          "energy_price": "Cena energii",
+          "energy_entity_id": "Encja narastającego licznika energii",
+          "power_entity_id": "Encja mocy ładowania",
+          "charging_power_threshold": "Próg wykrywania ładowania",
+          "battery_capacity_wh": "Pojemność baterii"
+        },
+        "data_description": {
+          "energy_price": "Cena energii w PLN za kWh.",
+          "energy_entity_id": "Sensor Home Assistant z narastającą wartością kWh.",
+          "power_entity_id": "Opcjonalny sensor mocy w watach.",
+          "charging_power_threshold": "Poziom mocy w W, od którego rower jest uznawany za ładowany.",
+          "battery_capacity_wh": "Opcjonalna pojemność baterii w Wh."
+        }
+      }
+    }
+  },
+  "entity": {
+    "number": {
+      "odometer_input": {
+        "name": "Licznik przebiegu"
+      }
+    },
+    "sensor": {
+      "total_odometer": {
+        "name": "Całkowity przebieg"
+      },
+      "distance_since_start": {
+        "name": "Przebieg od początku monitorowania"
+      },
+      "daily_distance": {
+        "name": "Przyrost przebiegu dzienny"
+      },
+      "weekly_distance": {
+        "name": "Przyrost przebiegu tygodniowy"
+      },
+      "monthly_distance": {
+        "name": "Przyrost przebiegu miesięczny"
+      },
+      "average_daily_distance_7d": {
+        "name": "Średni przebieg dzienny z 7 dni"
+      },
+      "average_daily_distance_30d": {
+        "name": "Średni przebieg dzienny z 30 dni"
+      },
+      "total_energy": {
+        "name": "Energia od początku monitorowania"
+      },
+      "weekly_energy": {
+        "name": "Energia w obecnym tygodniu"
+      },
+      "monthly_energy": {
+        "name": "Energia w obecnym miesiącu"
+      },
+      "kwh_per_100_km": {
+        "name": "Średnie zużycie energii"
+      },
+      "wh_per_km": {
+        "name": "Zużycie energii na kilometr"
+      },
+      "cost_per_100_km": {
+        "name": "Koszt przejechania 100 km"
+      },
+      "total_energy_cost": {
+        "name": "Koszt energii od początku monitorowania"
+      },
+      "charging_power": {
+        "name": "Bieżąca moc ładowania"
+      },
+      "last_odometer_update": {
+        "name": "Data ostatniej aktualizacji przebiegu"
+      }
+    },
+    "binary_sensor": {
+      "charging": {
+        "name": "Ładowanie"
+      }
+    }
+  },
+  "exceptions": {
+    "odometer_decrease": {
+      "message": "Nowy przebieg jest niższy od obecnego. Użyj akcji korekty przebiegu i potwierdź zmianę."
+    },
+    "correction_not_confirmed": {
+      "message": "Korekta przebiegu wymaga jawnego potwierdzenia."
+    },
+    "administrator_required": {
+      "message": "Tylko administratorzy Home Assistant mogą korygować przebieg wstecz."
+    },
+    "entry_not_found": {
+      "message": "Nie znaleziono wybranego wpisu E-bike Tracker."
+    }
+  },
+  "services": {
+    "correct_odometer": {
+      "name": "Skoryguj licznik przebiegu",
+      "description": "Koryguje przebieg roweru wstecz po potwierdzeniu administratora.",
+      "fields": {
+        "config_entry_id": {
+          "name": "ID wpisu konfiguracji",
+          "description": "Wpis konfiguracji E-bike Tracker, który ma zostać skorygowany."
+        },
+        "mileage": {
+          "name": "Przebieg",
+          "description": "Skorygowany całkowity przebieg w kilometrach."
+        },
+        "confirm": {
+          "name": "Potwierdzenie",
+          "description": "Musi być włączone, aby potwierdzić korektę wstecz."
+        }
+      }
+    }
+  }
+}

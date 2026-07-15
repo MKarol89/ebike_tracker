@@ -1,0 +1,26 @@
+correct_odometer:
+  name: Correct odometer
+  description: Correct the e-bike mileage backwards after administrator confirmation.
+  fields:
+    config_entry_id:
+      name: Config entry ID
+      description: The E-bike Tracker config entry to correct.
+      required: true
+      selector:
+        text:
+    mileage:
+      name: Mileage
+      description: The corrected total mileage in kilometers.
+      required: true
+      selector:
+        number:
+          min: 0
+          step: 0.1
+          mode: box
+          unit_of_measurement: km
+    confirm:
+      name: Confirm
+      description: Must be enabled to confirm the backward correction.
+      required: true
+      selector:
+        boolean:

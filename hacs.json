@@ -1,0 +1,7 @@
+{
+  "name": "E-bike Tracker",
+  "content_in_root": false,
+  "render_readme": true,
+  "domains": ["binary_sensor", "number", "sensor"],
+  "homeassistant": "2024.6.0"
+}

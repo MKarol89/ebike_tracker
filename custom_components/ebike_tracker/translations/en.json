@@ -1,0 +1,149 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add E-bike Tracker",
+        "description": "Configure one e-bike. The energy entity must be a cumulative kWh meter.",
+        "data": {
+          "bike_name": "Bike name",
+          "odometer_km": "Current total mileage",
+          "energy_entity_id": "Cumulative energy entity",
+          "power_entity_id": "Charging power entity",
+          "energy_price": "Energy price",
+          "battery_capacity_wh": "Battery capacity"
+        },
+        "data_description": {
+          "odometer_km": "Current odometer value in kilometers.",
+          "energy_entity_id": "A Home Assistant sensor with a cumulative kWh value, for example from a smart plug.",
+          "power_entity_id": "Optional power sensor in watts used to detect charging.",
+          "energy_price": "Energy price in PLN per kWh.",
+          "battery_capacity_wh": "Optional battery capacity in Wh."
+        }
+      }
+    },
+    "error": {
+      "bike_name_required": "Enter a bike name."
+    },
+    "abort": {
+      "already_configured": "This bike is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "E-bike Tracker options",
+        "description": "Update pricing, source entities, charging detection and battery details.",
+        "data": {
+          "energy_price": "Energy price",
+          "energy_entity_id": "Cumulative energy entity",
+          "power_entity_id": "Charging power entity",
+          "charging_power_threshold": "Charging detection threshold",
+          "battery_capacity_wh": "Battery capacity"
+        },
+        "data_description": {
+          "energy_price": "Energy price in PLN per kWh.",
+          "energy_entity_id": "A Home Assistant sensor with a cumulative kWh value.",
+          "power_entity_id": "Optional power sensor in watts.",
+          "charging_power_threshold": "Power level in W at or above which the bike is considered charging.",
+          "battery_capacity_wh": "Optional battery capacity in Wh."
+        }
+      }
+    }
+  },
+  "entity": {
+    "number": {
+      "odometer_input": {
+        "name": "Odometer"
+      }
+    },
+    "sensor": {
+      "total_odometer": {
+        "name": "Total mileage"
+      },
+      "distance_since_start": {
+        "name": "Distance since monitoring started"
+      },
+      "daily_distance": {
+        "name": "Daily distance"
+      },
+      "weekly_distance": {
+        "name": "Weekly distance"
+      },
+      "monthly_distance": {
+        "name": "Monthly distance"
+      },
+      "average_daily_distance_7d": {
+        "name": "Average daily distance 7 days"
+      },
+      "average_daily_distance_30d": {
+        "name": "Average daily distance 30 days"
+      },
+      "total_energy": {
+        "name": "Energy since monitoring started"
+      },
+      "weekly_energy": {
+        "name": "Weekly energy"
+      },
+      "monthly_energy": {
+        "name": "Monthly energy"
+      },
+      "kwh_per_100_km": {
+        "name": "Energy consumption"
+      },
+      "wh_per_km": {
+        "name": "Energy per kilometer"
+      },
+      "cost_per_100_km": {
+        "name": "Cost per 100 km"
+      },
+      "total_energy_cost": {
+        "name": "Total energy cost"
+      },
+      "charging_power": {
+        "name": "Charging power"
+      },
+      "last_odometer_update": {
+        "name": "Last mileage update"
+      }
+    },
+    "binary_sensor": {
+      "charging": {
+        "name": "Charging"
+      }
+    }
+  },
+  "exceptions": {
+    "odometer_decrease": {
+      "message": "The new mileage is lower than the current mileage. Use the correction action and confirm the change."
+    },
+    "correction_not_confirmed": {
+      "message": "Mileage correction requires explicit confirmation."
+    },
+    "administrator_required": {
+      "message": "Only Home Assistant administrators can correct mileage backwards."
+    },
+    "entry_not_found": {
+      "message": "The selected E-bike Tracker entry was not found."
+    }
+  },
+  "services": {
+    "correct_odometer": {
+      "name": "Correct odometer",
+      "description": "Correct the e-bike mileage backwards after administrator confirmation.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Config entry ID",
+          "description": "The E-bike Tracker config entry to correct."
+        },
+        "mileage": {
+          "name": "Mileage",
+          "description": "The corrected total mileage in kilometers."
+        },
+        "confirm": {
+          "name": "Confirm",
+          "description": "Must be enabled to confirm the backward correction."
+        }
+      }
+    }
+  }
+}
